@@ -1,0 +1,134 @@
+:root {
+    --bg-main: #F9FAFB;        
+    --card-bg: #FFFFFF;        
+    --input-bg: #FFFFFF;      
+    --accent: #22C55E;        
+    --border-color: #E5E7EB;   
+    --text-main: #111827;     
+    --text-muted: #6B7280;     
+    --input-focus: #DBFADE;    
+  }
+  
+  .patient-modal {
+    max-width: 700px;
+    margin: 40px auto;
+    background: var(--card-bg);
+    color: var(--text-main);
+    padding: 32px;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); /* Softer shadow for light mode */
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+  
+  /* Header Section */
+  .patient-modal h2 {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  
+  .subtitle {
+    color: var(--text-muted);
+    font-size: 14px;
+    margin-bottom: 28px;
+  }
+  
+  /* Tabs Styling */
+  .tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 24px;
+    border-bottom: 1px solid var(--border-color);
+  }
+  
+  .tabs button {
+    padding: 10px 16px;
+    border: none;
+    background: transparent;
+    color: var(--text-muted);
+    font-weight: 500;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s ease;
+  }
+  
+  .tabs .active {
+    color: var(--accent);
+    border-bottom: 2px solid var(--accent);
+  }
+  
+  /* Form Layout */
+  .patient-form label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: #374151; /* Darker grey for labels in light mode */
+    margin-bottom: 9px;
+  }
+  
+  .row {
+    display: flex;
+    gap: 18px;
+    margin-bottom: 20px;
+  }
+  
+  .row > div {
+    flex: 1;
+  }
+  
+  /* Input & Select Styles */
+  input, select {
+    width: 100%;
+    padding:  14px 5px 14px;
+    background: var(--input-bg);
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+    border-radius: 8px;
+    font-size: 14px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  
+  input:focus, select:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--input-focus);
+  }
+  
+  input::placeholder {
+    color: #9CA3AF;
+  }
+  
+  /* Button Styling */
+  .submit-btn {
+    margin-top: 20px;
+    padding: 14px;
+    width: 100%;
+    background: var(--accent);
+    color: #FFFFFF; /* White text for contrast on green */
+    font-size: 15px;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  
+  .submit-btn:hover {
+    background: #16A34A; /* Slightly darker green on hover */
+  }
+  
+  .submit-btn:disabled {
+    background: #E5E7EB;
+    color: #9CA3AF;
+    cursor: not-allowed;
+  }
+  
+  /* Message */
+  .message {
+    margin-top: 16px;
+    font-size: 14px;
+    color: #15803D; /* Deep forest green */
+    text-align: center;
+    font-weight: 500;
+  }
