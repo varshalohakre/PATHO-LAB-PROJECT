@@ -1,6 +1,7 @@
+import axios from 'axios';
 import { useEffect, useState } from "react";
 
-export default function AddPatient({ onClose }) {
+export default function AddPatient({ onClose, onSuccess }) {
   const [form, setForm] = useState({
     name: "",
     age: "",
@@ -9,10 +10,6 @@ export default function AddPatient({ onClose }) {
   });
 
   const [loading, setLoading] = useState(false);
-
-  function handleChange(e) {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  }
 
   async function handleSubmit() {
     if (!form.name || !form.age || !form.gender || !form.phone_number) {
@@ -41,8 +38,12 @@ export default function AddPatient({ onClose }) {
         return;
       }
 
-      alert("Patient added successfully");
+      alert("Patient added successfully");   
+      if (onSuccess) {
+        onSuccess(data.patient); 
+      }
       onClose(); // close modal on success
+
     } catch (err) {
       console.error(err);
       alert("Backend not reachable");
@@ -50,6 +51,12 @@ export default function AddPatient({ onClose }) {
       setLoading(false);
     }
   }
+
+
+  function handleChange(e) {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  }
+
 
   // ESC key support
   useEffect(() => {
@@ -68,7 +75,7 @@ export default function AddPatient({ onClose }) {
     >
       {/* Modal */}
       <div
-        className="bg-white w-[720px] rounded-2xl shadow-xl p-10 relative"
+        className="bg-white w-720px rounded-2xl shadow-xl p-10 relative"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Close button */}

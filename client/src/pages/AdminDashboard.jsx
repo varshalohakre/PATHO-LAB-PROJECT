@@ -1,9 +1,19 @@
 import { useState } from "react";
 import { Search, UserCircle, Bell } from "lucide-react"; 
-import AddPatient from "../pages/AddPatient";
+import AddPatient from "./AddPatient";
+import AddTest from "./AddTest";
 
 export default function AdminDashboard() {
   const [showAddPatient, setShowAddPatient] = useState(false);
+  const [showAddTest, setShowAddTest] = useState(false);
+  const [activePatient, setActivePatient] = useState(null);
+
+// This function will be called by AddPatient when registration is successful
+  const handlePatientSuccess = (patientData) => {
+    setActivePatient(patientData);
+    setShowAddPatient(false); // Close the Add Patient modal
+    setShowAddTest(true);    // Automatically open the Add Test modal
+  };
 
   return (
     <div className="min-h-screen bg-[#F2FBFA]">
@@ -62,7 +72,11 @@ export default function AdminDashboard() {
             button="Add Patient"
             onClick={() => setShowAddPatient(true)}
           />
-          <ManagementCard title="Test Management" value="89" button="Add Test" />
+          <ManagementCard title="Test Management" value="89" button="Add Test" 
+          onClick={() => {
+          setActivePatient(null); // No patient selected
+          setShowAddTest(true);
+          }}/>
           <ManagementCard title="Kit Management" value="342" button="Update Stock" />
         </div>
       </main>
@@ -71,10 +85,21 @@ export default function AdminDashboard() {
       {showAddPatient && (
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-[60] p-4">
           <div className="bg-white rounded-2xl w-full max-w-[600px] shadow-2xl overflow-hidden">
-            <AddPatient onClose={() => setShowAddPatient(false)} />
+            <AddPatient onClose={() => setShowAddPatient(false)}
+            onSuccess={handlePatientSuccess} />
           </div>
         </div>
       )}
+      {showAddTest && (
+    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-[60] p-4">
+      <div className="bg-white rounded-2xl w-full max-w-[700px] shadow-2xl overflow-hidden">
+        <AddTest 
+          patient={activePatient} // You can set this after adding a patient
+          onClose={() => setShowAddTest(false)} 
+        />
+      </div>
+    </div>
+  )}
     </div>
   );
 }
